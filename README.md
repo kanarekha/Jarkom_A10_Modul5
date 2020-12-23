@@ -24,3 +24,15 @@ xterm -T MOJOKERTO -e linux ubd0=MOJOKERTO,jarkom umid=MOJOKERTO eth0=daemon,,,s
 xterm -T GRESIK -e linux ubd0=GRESIK,jarkom umid=GRESIK eth0=daemon,,,switch4 mem=96M &
 xterm -T SIDOARJO -e linux ubd0=SIDOARJO,jarkom umid=SIDOARJO eth0=daemon,,,switch5 mem=96M &
 ```
+
+```
+uml_mconsole SURABAYA halt
+uml_mconsole MALANG halt
+uml_mconsole MOJOKERTO halt
+uml_mconsole SIDOARJO halt
+uml_mconsole GRESIK halt
+uml_mconsole PROBOLINGGO halt
+uml_mconsole KEDIRI halt
+uml_mconsole BATU halt
+uml_mconsole MADIUN halt
+```
