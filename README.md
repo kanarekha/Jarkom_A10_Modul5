@@ -67,13 +67,109 @@ uml_mconsole MADIUN halt
 ```
 
 * Setting IP pada setiap UML dengan mengetikkan ``` nano /etc/network/interfaces ```
+* interface pada UML SURABAYA
 ```
-ISI INTERFACE TIAP UML
+auto eth0
+iface eth0 inet static
+address 10.151.70.46
+netmask 255.255.255.252
+gateway 10.151.70.45
+auto eth1
+iface eth1 inet static
+address 192.168.0.1
+netmask 255.255.255.252
+auto eth2
+iface eth2 inet static
+address 192.168.0.5
+netmask 255.255.255.252
+```
+* interface pada UML BATU
+```
+auto eth0
+iface eth0 inet static
+address 192.168.0.6
+netmask 255.255.255.252
+gateway 192.168.0.5
+auto eth1
+iface eth1 inet static
+address 10.151.71.89
+netmask 255.255.255.248
+auto eth2
+iface eth2 inet static
+address 192.168.2.1
+netmask 255.255.255.0
+```
+* interface pada UML KEDIRI
+```
+auto eth0
+iface eth0 inet static
+address 192.168.0.2
+netmask 255.255.255.252
+gateway 192.168.0.1
+auto eth1
+iface eth1 inet static
+address 192.168.0.9
+netmask 255.255.255.248
+auto eth2
+iface eth2 inet static
+address 192.168.1.1
+netmask 255.255.255.0
+```
+* interface pada UML GRESIK
+```
+auto eth0
+iface eth0 inet static
+address 192.168.1.2
+netmask 255.255.255.0
+gateway 192.168.1.1
+```
+* interface pada UML MADIUN
+```
+auto eth0
+iface eth0 inet static
+address 192.168.0.10
+netmask 255.255.255.248
+gateway 192.168.0.9
+```
+* interface pada UML MALANG
+```
+auto eth0
+iface eth0 inet static
+address 10.151.71.90
+netmask 255.255.255.248
+gateway 10.151.71.89
+```
+* interface pada UML MOJOKERTO
+```
+auto eth0
+iface eth0 inet static
+address 10.151.71.91
+netmask 255.255.255.248
+gateway 10.151.71.89
+```
+* interface pada UML PROBOLINGGO
+```
+auto eth0
+iface eth0 inet static
+address 192.168.0.11
+netmask 255.255.255.248
+gateway 192.168.0.9
+```
+* interface pada UML SIDOARJO
+```
+auto eth0
+iface eth0 inet static
+address 192.168.2.2
+netmask 255.255.255.0
+gateway 192.168.2.1
 ```
 # Soal C
-* Melakukan routing agar setiap perangkat pada jaringan tersebut dapat terhubung dengan cara Membuat route.sh pada setiap router
+* Melakukan routing agar setiap perangkat pada jaringan tersebut dapat terhubung dengan cara Membuat route.sh pada router SURABAYA
 ```
-ISI ROUTING
+route add -net 192.168.1.0 netmask 255.255.255.0 gw 192.168.0.2
+route add -net 192.168.2.0 netmask 255.255.255.0 gw 192.168.0.6
+route add -net 192.168.0.8 netmask 255.255.255.248 gw 192.168.0.2
+route add -net 10.151.71.88 netmask 255.255.255.248 gw 192.168.0.6
 ```
 # Soal 1
 Agar topologi yang kalian buat dapat mengakses keluar, kalian diminta untuk mengkonfigurasi SURABAYA menggunakan iptables, namun Bibah tidak ingin kalian menggunakan MASQUERADE.
