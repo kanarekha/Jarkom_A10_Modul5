@@ -1,4 +1,10 @@
-# Jarkom_A10_Modul5
+# Lapres_Jarkom_A10_Modul5
+
+Anggota :
+
+Kana Rekha 05111840000001
+
+Abdul Rozak Baharudin 05111840000148
 
 # Soal A
 * Membuat pembagian subnet seperti gambar berikut
