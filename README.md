@@ -177,8 +177,9 @@ Agar topologi yang kalian buat dapat mengakses keluar, kalian diminta untuk meng
 **Penyelesaian**
 * Pada UML SURABAYA memasukkan perintah sebagai berikut:
 ```
-iptables -t nat -A POSTROUTING -s 192.168.0.0/22 -o eth0 -j SNAT --to-source 10.151.72.44
+iptables -t nat -A POSTROUTING -s 192.168.0.0/22 -o eth0 -j SNAT --to-source 10.151.72.46
 ```
+* Bila sudah, maka semua UML akan bisa ping ke its.ac.id
 
 # Soal 2
 Mendrop semua akses SSH dari luar Topologi (UML) Kalian pada server yang memiliki ip DMZ (DHCP dan DNS SERVER) pada SURABAYA demi menjaga keamanan.
@@ -188,34 +189,42 @@ Mendrop semua akses SSH dari luar Topologi (UML) Kalian pada server yang memilik
 ```
 iptables -A FORWARD -d 10.151.73.88/29 -i eth0 -p tcp --dport 22 -j DROP
 ```
-
+* Selanjutnya buka putty dan buat koneksi ssh ke uml MALANG dengan menuliskan berikut ```nc 10.151.73.90 22``` bila sudah terdrop maka pada putty tidak akan keluar seperti ini ```SSH-2.0-OpenSSH_6.0p1 Debian-4+deb7u4```
+* Lalu pada MALANG ```nc -l -p 22``` untuk mengetes apakah dapat menerima packet yang datang
 # Soal 3
 Membatasi DHCP dan DNS server hanya boleh menerima maksimal 3 koneksi ICMP secara bersamaan yang berasal dari mana saja menggunakan iptables pada masing masing server, selebihnya akan di DROP.
 
 **Penyelesaian**
-* Pada UML SURABAYA memasukkan perintah sebagai berikut:
+* Pada UML MALANG & MOJOKERTO memasukkan perintah sebagai berikut:
 ```
-iptables -A FORWARD -d 10.151.73.96/29 -i eth0 -p tcp --dport 22 -j DROP
+iptables -A INPUT -p icmp -m connlimit --connlimit-above 3 --connlimit-mask 0 -j DROP
 ```
-
+* Melakukan ping ke UML MALANG/MOJOKERTO ```ping 10.151.73.90``` dengan 4 UML yang berbeda, maka UML ke 4 tidak akan bisa melakukan ping ke MALANG
 # Soal 4
 Membatasi akses ke MALANG yang berasal dari SUBNET SIDOARJO dan SUBNET GRESIK dengan peraturan sebagai berikut:
 * Akses dari subnet SIDOARJO hanya diperbolehkan pada pukul 07.00 - 17.00 pada hari Senin sampai Jumat .Selain itu paket akan di REJECT.
 
 **Penyelesaian**
-* Pada UML SURABAYA memasukkan perintah sebagai berikut:
+* Pada UML MALANG memasukkan perintah sebagai berikut:
 ```
-iptables -A FORWARD -d 10.151.73.96/29 -i eth0 -p tcp --dport 22 -j DROP
+iptables -A INPUT -s 192.168.2.0/24 -m time --timestart 07:00 --timestop 17:00 --weekdays Mon,Tue,Wed,Thu,Fri -j ACCEPT
 ```
+```
+iptables -A INPUT -s 192.168.2.0/24 -j REJECT
+```
+* untuk melakukan percobaan apakah bisa atau tidak, kita melakukan ```date``` lalu lihat apakah waktu di MALANG memenuhi syarat diakses oleh SIDOARJO
+* untuk mencoba dengan waktu yang tidak bisa diakses, kita bisa melakukan ```date +%Y%m%d -s "20201229"``` dan ```date +%T -s "18:00:00"``` untuk mengganti waktu MALANG
 # Soal 5
 Membatasi akses ke MALANG yang berasal dari SUBNET SIDOARJO dan SUBNET GRESIK dengan peraturan sebagai berikut:
 * Akses dari subnet GRESIK hanya diperbolehkan pada pukul 17.00 hingga pukul 07.00 setiap harinya.Selain itu paket akan di REJECT.
 
 **Penyelesaian**
-* Pada UML SURABAYA memasukkan perintah sebagai berikut:
+* Pada UML MALANG memasukkan perintah sebagai berikut:
 ```
-iptables -A FORWARD -d 10.151.73.96/29 -i eth0 -p tcp --dport 22 -j DROP
+iptables -A INPUT -s 192.168.1.0/24 -m time --timestart 07:00 --timestop 17:00 -j REJECT
 ```
+* untuk melakukan percobaan apakah bisa atau tidak, kita melakukan ```date``` lalu lihat apakah waktu di MALANG memenuhi syarat diakses oleh GRESIK
+* untuk mencoba dengan waktu yang bisa diakses, kita bisa melakukan ```date +%Y%m%d -s "20201229"``` dan ```date +%T -s "18:00:00"``` untuk mengganti waktu MALANG
 # Soal 7
 Semua paket didrop oleh firewall (dalam topologi) tercatat dalam log pada setiap UML yang memiliki aturan drop.
 
