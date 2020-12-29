@@ -71,6 +71,7 @@ ISI ROUTING
 ```
 # Soal 1
 Agar topologi yang kalian buat dapat mengakses keluar, kalian diminta untuk mengkonfigurasi SURABAYA menggunakan iptables, namun Bibah tidak ingin kalian menggunakan MASQUERADE.
+
 **Penyelesaian**
 * Pada UML SURABAYA memasukkan perintah sebagai berikut:
 ```
@@ -79,6 +80,7 @@ iptables -t nat -A POSTROUTING -s 192.168.0.0/22 -o eth0 -j SNAT --to-source 10.
 
 # Soal 2
 Mendrop semua akses SSH dari luar Topologi (UML) Kalian pada server yang memiliki ip DMZ (DHCP dan DNS SERVER) pada SURABAYA demi menjaga keamanan.
+
 **Penyelesaian**
 * Pada UML SURABAYA memasukkan perintah sebagai berikut:
 ```
@@ -87,6 +89,7 @@ iptables -A FORWARD -d 10.151.73.88/29 -i eth0 -p tcp --dport 22 -j DROP
 
 # Soal 3
 Membatasi DHCP dan DNS server hanya boleh menerima maksimal 3 koneksi ICMP secara bersamaan yang berasal dari mana saja menggunakan iptables pada masing masing server, selebihnya akan di DROP.
+
 **Penyelesaian**
 * Pada UML SURABAYA memasukkan perintah sebagai berikut:
 ```
@@ -96,6 +99,7 @@ iptables -A FORWARD -d 10.151.73.96/29 -i eth0 -p tcp --dport 22 -j DROP
 # Soal 4
 Membatasi akses ke MALANG yang berasal dari SUBNET SIDOARJO dan SUBNET GRESIK dengan peraturan sebagai berikut:
 * Akses dari subnet SIDOARJO hanya diperbolehkan pada pukul 07.00 - 17.00 pada hari Senin sampai Jumat .Selain itu paket akan di REJECT.
+
 **Penyelesaian**
 * Pada UML SURABAYA memasukkan perintah sebagai berikut:
 ```
@@ -104,6 +108,7 @@ iptables -A FORWARD -d 10.151.73.96/29 -i eth0 -p tcp --dport 22 -j DROP
 # Soal 5
 Membatasi akses ke MALANG yang berasal dari SUBNET SIDOARJO dan SUBNET GRESIK dengan peraturan sebagai berikut:
 * Akses dari subnet GRESIK hanya diperbolehkan pada pukul 17.00 hingga pukul 07.00 setiap harinya.Selain itu paket akan di REJECT.
+
 **Penyelesaian**
 * Pada UML SURABAYA memasukkan perintah sebagai berikut:
 ```
@@ -111,6 +116,7 @@ iptables -A FORWARD -d 10.151.73.96/29 -i eth0 -p tcp --dport 22 -j DROP
 ```
 # Soal 7
 Semua paket didrop oleh firewall (dalam topologi) tercatat dalam log pada setiap UML yang memiliki aturan drop.
+
 **Penyelesaian**
 * Pada UML MALANG, MOJOKERTO, dan SURABAYA membuat file no7.sh lalu memasukkan perintah seperti gambar dibawah ini .
 ```
